@@ -1,6 +1,7 @@
+// Define props which will be lifted upto Parent Components
 type Props = { toggleName: () => void; name: string };
 
-const Primary: React.FC<Props> = ({name, toggleName}) => {
+const Primary: React.FC<Props> = ({ name, toggleName }) => {
   return (
     <>
       <div
@@ -10,7 +11,7 @@ const Primary: React.FC<Props> = ({name, toggleName}) => {
           padding: 10,
         }}
       >
-        Child
+        CHILD ELEMENT
         <button
           style={{ padding: 5, marginLeft: 10 }}
           onClick={() => toggleName()}
