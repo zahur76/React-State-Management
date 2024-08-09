@@ -1,5 +1,6 @@
 import { ReactNode, useState } from "react";
 import React from "react";
+import { useExampleContext } from "../../context/ExampleContext";
 
 type Props = {
   children: ReactNode;
@@ -15,9 +16,23 @@ type ChildElement = React.ReactElement<ChildProps>;
 
 const Main: React.FC<Props> = ({ children }) => {
   const [name, setName] = useState("zahur");
+  const [contextExample, setContextExample] = useState("");
+
+  // Initialize context from services
+  // const { exampleFunction } = useExampleContext()
+  const { exampleFunction } = useExampleContext();
 
   const toggleName = () => {
     name == "zahur" ? setName("shab") : setName("zahur");
+  };
+
+  const handleSubmit = (e: unknown) => {
+    e.preventDefault();
+    const res = exampleFunction(contextExample);
+    if (res) {
+      setContextExample(res);
+      // setContextExample(res)
+    }
   };
 
   return (
@@ -42,6 +57,17 @@ const Main: React.FC<Props> = ({ children }) => {
           ? React.cloneElement(child as ChildElement, { name, toggleName })
           : child;
       })}
+      <form onSubmit={handleSubmit}>
+        <label>Add Name</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          value={contextExample}
+          onChange={(e) => setContextExample(e.target.value)}
+        />
+      </form>
+      <h1 style={{ display: "block" }}>{contextExample}</h1>
     </div>
   );
 };
