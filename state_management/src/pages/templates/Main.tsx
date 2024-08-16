@@ -1,6 +1,7 @@
 import { ReactNode, useState } from "react";
 import React from "react";
 import { useExampleContext } from "../../context/ExampleContext";
+import myTestFunction from "../../services/testServices";
 
 type Props = {
   children: ReactNode;
@@ -18,6 +19,8 @@ const Main: React.FC<Props> = ({ children }) => {
   const [name, setName] = useState("zahur");
   const [contextExample, setContextExample] = useState("");
 
+  const { var1, testFunction } = myTestFunction();
+
   // Initialize context from services
   // const { exampleFunction } = useExampleContext()
   const { exampleFunction } = useExampleContext();
@@ -34,6 +37,8 @@ const Main: React.FC<Props> = ({ children }) => {
       // setContextExample(res)
     }
   };
+
+
 
   return (
     <div
@@ -68,6 +73,9 @@ const Main: React.FC<Props> = ({ children }) => {
         />
       </form>
       <h1 style={{ display: "block" }}>{contextExample}</h1>
+      <div><button onClick={()=>testFunction(1)}>Banana</button></div>
+      <div><button onClick={()=>testFunction(2)}>Apple</button></div>
+      <div><h1>{var1}</h1></div>
     </div>
   );
 };
